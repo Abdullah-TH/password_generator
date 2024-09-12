@@ -2,39 +2,43 @@ require 'rails_helper'
 
 RSpec.describe Password, type: :model do
   context "creating passwords" do
-    let!(:password) { Password.new(
-      website: "https://google.com",
-      username: "User",
-      password: "123456"
-    ) }
+    let(:password) { create(:password) }
 
-    it "should create password if valid website url, username and password are provided" do
-      expect(password.valid?).to be_truthy
+    it "is valid with website url, username and password are provided" do
+      expect(password).to be_valid
     end
 
-    it "should not create password with empty website" do
+    it "is not valid with empty website" do
       password.website = ""
-      expect(password.valid?).to eq(false)
+      expect(password).not_to be_valid
     end
 
-    it "should not create password with empty username" do
+    it "is not valid with empty username" do
       password.username = ""
-      expect(password.valid?).to eq(false)
+      expect(password).not_to be_valid
     end
 
 
-    it "should not create password with empty password" do
+    it "is not valid with empty password" do
       password.password = ""
-      expect(password.valid?).to eq(false)
+      expect(password).not_to be_valid
     end
 
-    it "should not create password with incorrect formatted website" do
+    it "is not valid with incorrectly formatted website" do
       password.website = "google"
-      expect(password.valid?).to eq(false)
+      expect(password).not_to be_valid
+
+      password.website = "google.com"
+      expect(password).to be_valid
+
+      password.website = "google.io"
+      expect(password).to be_valid
+
+      password.website = "www.google.com"
+      expect(password).to be_valid
     end
 
-    it "should not create password if website is not unique" do
-      password.save
+    it "is not valid with a non-unique website" do
       password_2 = password.dup
       expect(password_2.valid?).to eq(false)
     end
