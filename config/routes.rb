@@ -12,5 +12,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "passwords#index"
 
-  resources :passwords, only: [ :index, :new, :create, :edit, :update, :destroy ]
+  resources :passwords, only: [ :index, :new, :create, :edit, :update, :destroy ] do
+    collection do
+      get "generate"
+    end
+  end
 end

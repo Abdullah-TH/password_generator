@@ -1,0 +1,37 @@
+<%= turbo_frame_tag "generate-password-form" do %>
+  <%= form_with url: generate_passwords_path,
+                method: :get,
+                class: "flex flex-col gap-4" do |f| %>
+    <%= f.text_field :generated_password,
+                     value: @generated_password,
+                     class: "rounded w-full" %>
+    <div class="flex justify-between">
+      <div class="flex gap-4 items-center">
+        <fieldset>
+          <%= f.check_box :lower_case_letters %>
+          <%= f.label :lower_case_letters %>
+        </fieldset>
+        <fieldset>
+          <%= f.check_box :upper_case_letters %>
+          <%= f.label :upper_case_letters %>
+        </fieldset>
+        <fieldset>
+          <%= f.check_box :digits %>
+          <%= f.label :digits %>
+        </fieldset>
+        <fieldset>
+          <%= f.check_box :symbols %>
+          <%= f.label :symbols %>
+        </fieldset>
+      </div>
+      <div>
+        <%= f.submit "Generate Password",
+                     formaction: generate_passwords_path,
+                     class: "bg-sky-600 text-white p-2 rounded" %>
+        <%= f.submit "Save Password",
+                     formaction: new_password_path,
+                     class: "bg-sky-600 text-white p-2 rounded" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

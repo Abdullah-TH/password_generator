@@ -1,9 +1,14 @@
 class PasswordsController < ApplicationController
+  def generate
+    @generated_password = SecureRandom.base64(15)
+  end
+
   def index
     @passwords = Password.all
   end
 
   def new
+    @password = Password.new
   end
 
   def edit
