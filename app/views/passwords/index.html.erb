@@ -1,0 +1,19 @@
+<div class="container mx-auto w-full max-w-[1200px]">
+  <h1 class="font-bold text-4xl">Passwords</h1>
+  <div class="grid grid-cols-4 gap-4 mt-8">
+    <div class="font-bold">Website</div>
+    <div class="font-bold">Username/Email</div>
+    <div class="font-bold">Password</div>
+    <div class="font-bold">Actions</div>
+
+    <% @passwords.each do |password| %>
+      <div class="bg-gray-100"><%= password.website %></div>
+      <div class="bg-gray-100"><%= password.username %></div>
+      <div class="bg-gray-100"><%= password.password %></div>
+      <div class="flex gap-4 bg-gray-100">
+        <%= link_to "Edit" %>
+        <%= link_to "Delete" %>
+      </div>
+    <% end %>
+  </div>
+</div>
