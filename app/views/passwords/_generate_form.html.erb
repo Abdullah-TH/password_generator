@@ -2,18 +2,30 @@
   <%= form_with url: generate_passwords_path,
                 method: :get,
                 class: "flex flex-col gap-4" do |f| %>
+
+    <% if @error_message %>
+      <p class="text-red-500">
+        <%= @error_message %>
+      </p>
+    <% end %>
+
     <%= f.text_field :generated_password,
                      value: @generated_password,
                      class: "rounded w-full" %>
+
     <div class="flex justify-between">
       <div class="flex gap-4 items-center">
-        <fieldset>
-          <%= f.check_box :lower_case_letters %>
-          <%= f.label :lower_case_letters %>
+        <fieldset class="mr-8">
+          <%= f.label "length: " %>
+          <%= f.number_field :length, placeholder: "16", in: 1..100, class: "w-[90px] h-[22px]" %>
         </fieldset>
         <fieldset>
-          <%= f.check_box :upper_case_letters %>
-          <%= f.label :upper_case_letters %>
+          <%= f.check_box :lowercase_letters %>
+          <%= f.label :lowercase_letters %>
+        </fieldset>
+        <fieldset>
+          <%= f.check_box :uppercase_letters %>
+          <%= f.label :uppercase_letters %>
         </fieldset>
         <fieldset>
           <%= f.check_box :digits %>
