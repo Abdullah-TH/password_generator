@@ -17,22 +17,26 @@
       <div class="flex gap-4 items-center">
         <fieldset class="mr-8">
           <%= f.label "length: " %>
-          <%= f.number_field :length, placeholder: "16", in: 1..100, class: "w-[90px] h-[22px]" %>
+          <%= f.number_field :length,
+                             placeholder: "16",
+                             in: 1..100,
+                             value: @length,
+                             class: "w-[90px] h-[22px]" %>
         </fieldset>
         <fieldset>
-          <%= f.check_box :lowercase_letters %>
+          <%= f.check_box :lowercase_letters, checked: @include_lowercase_letters %>
           <%= f.label :lowercase_letters %>
         </fieldset>
         <fieldset>
-          <%= f.check_box :uppercase_letters %>
+          <%= f.check_box :uppercase_letters, checked: @include_uppercase_letters %>
           <%= f.label :uppercase_letters %>
         </fieldset>
         <fieldset>
-          <%= f.check_box :digits %>
+          <%= f.check_box :digits, checked: @include_digits %>
           <%= f.label :digits %>
         </fieldset>
         <fieldset>
-          <%= f.check_box :symbols %>
+          <%= f.check_box :symbols, checked: @include_symbols %>
           <%= f.label :symbols %>
         </fieldset>
       </div>

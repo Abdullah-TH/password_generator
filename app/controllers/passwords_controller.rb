@@ -1,12 +1,17 @@
 class PasswordsController < ApplicationController
   def generate
+    @length = params[:length].empty? ? 16 : params[:length].to_i
+    @include_uppercase_letters = params["uppercase_letters"] == "1"
+    @include_lowercase_letters = params["lowercase_letters"] == "1"
+    @include_digits = params["digits"] == "1"
+    @include_symbols = params["symbols"] == "1"
     begin
       @generated_password = Password.generate(
-        length: params[:length].empty? ? 16 : params[:length].to_i,
-        include_uppercase_letters: params["uppercase_letters"] != "0",
-        include_lowercase_letters: params["lowercase_letters"] != "0",
-        include_digits: params["digits"] != "0",
-        include_symbols: params["symbols"] != "0",
+        length: @length,
+        include_uppercase_letters: @include_uppercase_letters,
+        include_lowercase_letters: @include_lowercase_letters,
+        include_digits: @include_digits,
+        include_symbols: @include_symbols,
         )
     rescue => e
       @error_message = e.message
