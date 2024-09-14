@@ -20,6 +20,12 @@ class PasswordsController < ApplicationController
 
   def index
     @passwords = Password.all
+    # default values
+    @length = 16
+    @include_uppercase_letters = true
+    @include_lowercase_letters = true
+    @include_digits = true
+    @include_symbols = true
   end
 
   def new
