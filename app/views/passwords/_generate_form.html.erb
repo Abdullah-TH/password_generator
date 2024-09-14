@@ -1,7 +1,8 @@
 <%= turbo_frame_tag "generate-password-form" do %>
   <%= form_with url: generate_passwords_path,
                 method: :get,
-                class: "flex flex-col gap-4" do |f| %>
+                class: "flex flex-col gap-4",
+                data: { controller: "passwords" } do |f| %>
 
     <% if @error_message %>
       <p class="text-red-500">
@@ -11,7 +12,11 @@
 
     <%= f.text_field :generated_password,
                      value: @generated_password,
-                     class: "rounded w-full" %>
+                     class: "rounded w-full",
+                     data: {
+                       passwords_target: "generatedPasswordTextField",
+                       action: "input->passwords#generatedPasswordTextFieldValueChanged"
+                     } %>
 
     <div class="flex justify-between">
       <div class="flex gap-4 items-center">
@@ -46,7 +51,9 @@
                      class: "bg-sky-600 text-white p-2 rounded" %>
         <%= f.submit "Save Password",
                      formaction: new_password_path,
-                     class: "bg-sky-600 text-white p-2 rounded" %>
+                     disabled: @generated_password.blank?,
+                     class: "bg-sky-600 text-white p-2 rounded #{ @generated_password.blank? ? "opacity-50" : ""}",
+                     data: { passwords_target: "savePasswordButton" } %>
       </div>
     </div>
   <% end %>
