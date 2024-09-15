@@ -13,6 +13,7 @@ class PasswordsController < ApplicationController
         include_digits: @include_digits,
         include_symbols: @include_symbols,
         )
+      session[:generated_password] = @generated_password
     rescue => e
       @error_message = e.message
     end
@@ -29,7 +30,9 @@ class PasswordsController < ApplicationController
   end
 
   def new
+    redirect_to passwords_path unless turbo_frame_request?
     @password = Password.new
+    @password.password = session[:generated_password]
   end
 
   def edit

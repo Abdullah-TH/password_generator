@@ -53,7 +53,7 @@
                      formaction: new_password_path,
                      disabled: @generated_password.blank?,
                      class: "bg-sky-600 text-white p-2 rounded cursor-pointer #{ @generated_password.blank? ? "opacity-50" : ""}",
-                     data: { passwords_target: "savePasswordButton" } %>
+                     data: { passwords_target: "savePasswordButton", turbo_frame: "modal-view" } %>
       </div>
     </div>
   <% end %>
