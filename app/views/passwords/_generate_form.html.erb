@@ -48,11 +48,11 @@
       <div>
         <%= f.submit "Generate Password",
                      formaction: generate_passwords_path,
-                     class: "bg-sky-600 text-white p-2 rounded" %>
+                     class: "bg-sky-600 text-white p-2 rounded cursor-pointer" %>
         <%= f.submit "Save Password",
                      formaction: new_password_path,
                      disabled: @generated_password.blank?,
-                     class: "bg-sky-600 text-white p-2 rounded #{ @generated_password.blank? ? "opacity-50" : ""}",
+                     class: "bg-sky-600 text-white p-2 rounded cursor-pointer #{ @generated_password.blank? ? "opacity-50" : ""}",
                      data: { passwords_target: "savePasswordButton" } %>
       </div>
     </div>
