@@ -39,11 +39,23 @@ class PasswordsController < ApplicationController
   end
 
   def create
+    @password = Password.new(password_params)
+    if @password.save
+      redirect_to passwords_path
+    else
+      render :new
+    end
   end
 
   def update
   end
 
   def destroy
+  end
+
+  private
+
+  def password_params
+    params.require(:password).permit(:website, :username, :password)
   end
 end
